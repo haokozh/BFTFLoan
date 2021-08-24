@@ -1,13 +1,15 @@
-﻿using System;
+﻿using BFTFLoan.Models;
+using BFTFLoan.Models.Services;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace BFTFLoan.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly LoanTrialService loanTrialService = new LoanTrialService();
+
         public ActionResult Index()
         {
             return View();
@@ -26,5 +28,6 @@ namespace BFTFLoan.Controllers
 
             return View();
         }
+
     }
 }
