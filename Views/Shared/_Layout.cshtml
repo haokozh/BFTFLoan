@@ -17,7 +17,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("應用程式名稱", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("BFTF", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -25,6 +25,8 @@
                     <li>@Html.ActionLink("關於", "About", "Home")</li>
                     <li>@Html.ActionLink("連絡人", "Contact", "Home")</li>
                     <li>@Html.ActionLink("貸款試算", "Create", "LoanTrial")</li>
+                    <li>@Html.ActionLink("登入", "Login", "Member")</li>
+                    <li>@Html.ActionLink("註冊", "Register", "Member")</li>
                 </ul>
             </div>
         </div>

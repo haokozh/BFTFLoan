@@ -6,7 +6,7 @@ using System.Web;
 
 namespace BFTFLoan.Models.ViewModels
 {
-    public class LoanTrialCreateViewModel
+    public class LoanTrialCreateVM
     {
         // 本金
         [Display(Name = "本金")]

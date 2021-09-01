@@ -9,9 +9,9 @@ namespace BFTFLoan.Models.Services
     public class LoanTrialService
     {
 
-        public List<LoanTrialViewModel> GetLoanTrialResult(LoanTrialCreateViewModel viewModel)
+        public List<LoanTrialVM> GetLoanTrialResult(LoanTrialCreateVM viewModel)
         {
-            List<LoanTrialViewModel> loanTrialResults = new List<LoanTrialViewModel>();
+            List<LoanTrialVM> loanTrialResults = new List<LoanTrialVM>();
 
             // 第 0 期剩餘本金
             decimal remain = viewModel.Principal;
@@ -54,7 +54,7 @@ namespace BFTFLoan.Models.Services
                 }
 
                 // 建立 LoanTrialViewModel 物件 並加入 loanTrialResults 中
-                loanTrialResults.Add(new LoanTrialViewModel
+                loanTrialResults.Add(new LoanTrialVM
                 {
                     CurrentNumOfPeriods = currentNumOfPeriods,
                     CurrentInterestPayable = currentInterestPayable,

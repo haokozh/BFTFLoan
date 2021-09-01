@@ -45,10 +45,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -122,12 +130,27 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoanTrialController.cs" />
+    <Compile Include="Controllers\MemberController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\EFModels\AppDbContext.cs" />
+    <Compile Include="Models\EFModels\Borrower.cs" />
+    <Compile Include="Models\EFModels\Certificate.cs" />
+    <Compile Include="Models\EFModels\Investment.cs" />
+    <Compile Include="Models\EFModels\Investor.cs" />
+    <Compile Include="Models\EFModels\Loan.cs" />
+    <Compile Include="Models\EFModels\Member.cs" />
+    <Compile Include="Models\EFModels\Repayment.cs" />
+    <Compile Include="Models\EFModels\Resell.cs" />
+    <Compile Include="Models\EFModels\School.cs" />
+    <Compile Include="Models\Repositories\MemberRepository.cs" />
     <Compile Include="Models\Services\LoanTrialService.cs" />
-    <Compile Include="Models\ViewModels\LoanTrialCreateViewModel.cs" />
-    <Compile Include="Models\ViewModels\LoanTrialViewModel.cs" />
+    <Compile Include="Models\Services\MemberService.cs" />
+    <Compile Include="Models\ViewModels\LoanTrial\LoanTrialCreateVM.cs" />
+    <Compile Include="Models\ViewModels\LoanTrial\LoanTrialVM.cs" />
+    <Compile Include="Models\ViewModels\Member\LoginVM.cs" />
+    <Compile Include="Models\ViewModels\Member\RegisterVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -165,6 +188,8 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\LoanTrial\DisplayResult.cshtml" />
     <Content Include="Views\LoanTrial\Create.cshtml" />
+    <Content Include="Views\Member\Login.cshtml" />
+    <Content Include="Views\Member\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -177,6 +202,9 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,33 +1,32 @@
-﻿@model IEnumerable<BFTFLoan.Models.ViewModels.LoanTrialViewModel>
+﻿@model IEnumerable<BFTFLoan.Models.ViewModels.LoanTrialVM>
 
 @{
     ViewBag.Title = "DisplayResult";
 }
 
-<h2>DisplayResult</h2>
+<h2>貸款試算結果</h2>
 
 <div>
-    @Html.ActionLink("Back to Create", "Create")
+    @Html.ActionLink("返回至貸款試算", "Create")
 </div>
 
-<table class="table">
+<table class="table table-bordered text-center">
     <tr>
-        <th>
+        <th class="text-center">
             @Html.DisplayNameFor(model => model.CurrentNumOfPeriods)
         </th>
-        <th>
+        <th class="text-center">
             @Html.DisplayNameFor(model => model.CurrentPayable)
         </th>
-        <th>
+        <th class="text-center">
             @Html.DisplayNameFor(model => model.CurrentInterestPayable)
         </th>
-        <th>
+        <th class="text-center">
             @Html.DisplayNameFor(model => model.CurrentPrincipalPayable)
         </th>
-        <th>
+        <th class="text-center">
             @Html.DisplayNameFor(model => model.RemainPrincipal)
         </th>
-        <th></th>
     </tr>
 
 @foreach (var item in Model) {

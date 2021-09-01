@@ -6,7 +6,7 @@ using System.Web;
 
 namespace BFTFLoan.Models.ViewModels
 {
-    public class LoanTrialViewModel
+    public class LoanTrialVM
     {
         // 當前期數
         [Display(Name = "當前期數")]

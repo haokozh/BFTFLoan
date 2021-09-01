@@ -27,7 +27,7 @@ namespace BFTFLoan.Controllers
 
         // POST: LoanTrial/Create
         [HttpPost]
-        public ActionResult Create(LoanTrialCreateViewModel viewModel)
+        public ActionResult Create(LoanTrialCreateVM viewModel)
         {
             try
             {
@@ -42,7 +42,7 @@ namespace BFTFLoan.Controllers
 
         public ActionResult DisplayResult()
         {
-            var results = (List<LoanTrialViewModel>)Session["results"];
+            var results = (List<LoanTrialVM>)Session["results"];
             return View(results);
         }
     }
