@@ -130,27 +130,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoanTrialController.cs" />
-    <Compile Include="Controllers\MemberController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\EFModels\AppDbContext.cs" />
-    <Compile Include="Models\EFModels\Borrower.cs" />
-    <Compile Include="Models\EFModels\Certificate.cs" />
-    <Compile Include="Models\EFModels\Investment.cs" />
-    <Compile Include="Models\EFModels\Investor.cs" />
-    <Compile Include="Models\EFModels\Loan.cs" />
-    <Compile Include="Models\EFModels\Member.cs" />
-    <Compile Include="Models\EFModels\Repayment.cs" />
-    <Compile Include="Models\EFModels\Resell.cs" />
-    <Compile Include="Models\EFModels\School.cs" />
-    <Compile Include="Models\Repositories\MemberRepository.cs" />
     <Compile Include="Models\Services\LoanTrialService.cs" />
-    <Compile Include="Models\Services\MemberService.cs" />
-    <Compile Include="Models\ViewModels\LoanTrial\LoanTrialCreateVM.cs" />
-    <Compile Include="Models\ViewModels\LoanTrial\LoanTrialVM.cs" />
-    <Compile Include="Models\ViewModels\Member\LoginVM.cs" />
-    <Compile Include="Models\ViewModels\Member\RegisterVM.cs" />
+    <Compile Include="Models\ViewModels\LoanTrialCreateVM.cs" />
+    <Compile Include="Models\ViewModels\LoanTrialVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -183,16 +168,14 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\LoanTrial\DisplayResult.cshtml" />
     <Content Include="Views\LoanTrial\Create.cshtml" />
-    <Content Include="Views\Member\Login.cshtml" />
-    <Content Include="Views\Member\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\EFModels\" />
+    <Folder Include="Models\Repositories\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
