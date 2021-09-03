@@ -13,12 +13,6 @@ namespace BFTFLoan.Controllers
     {
         private readonly LoanTrialService loanTrialService = new LoanTrialService();
 
-        // GET: LoanTrial
-        public ActionResult Index()
-        { 
-            return View();
-        }
-
         // GET: LoanTrial/Create
         public ActionResult Create()
         {
@@ -34,16 +28,23 @@ namespace BFTFLoan.Controllers
                 Session["results"] = loanTrialService.GetLoanTrialResult(viewModel);
                 return RedirectToAction("DisplayResult");
             }
-            catch
+            catch (Exception e)
             {
-                return View();
+                ModelState.AddModelError(string.Empty, e.Message);
             }
+
+            return View(viewModel);
         }
 
         public ActionResult DisplayResult()
         {
-            var results = (List<LoanTrialVM>)Session["results"];
-            return View(results);
+            if (ModelState.IsValid)
+            {
+                var results = (List<LoanTrialVM>)Session["results"];
+                return View(results);
+            }
+
+            return View();
         }
     }
 }
