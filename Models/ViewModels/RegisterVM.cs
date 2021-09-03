@@ -24,6 +24,7 @@ namespace BFTFLoan.Models.ViewModels
         [Required(ErrorMessage = "{0}必填")]
         [Display(Name = "密碼")]
         [DataType(DataType.Password)]
+        [MinLength(8, ErrorMessage = "{0}必須至少 8 個字元")]
         public string Password { get; set; }
 
         [Required(ErrorMessage = "{0}必填")]
