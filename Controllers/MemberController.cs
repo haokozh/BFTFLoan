@@ -64,7 +64,7 @@ namespace BFTFLoan.Controllers
             try
             {
                 // 使用者的註冊信箱
-                string userEmail = (string)Session["userEmail"];
+                string userEmail = Convert.ToString(Session["userEmail"]);
 
                 // 取得 OTP
                 Totp totp = memberService.GetOTP();

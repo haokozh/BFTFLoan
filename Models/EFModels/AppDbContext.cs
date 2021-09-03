@@ -8,7 +8,7 @@ namespace BFTFLoan.Models.EFModels
     public partial class AppDbContext : DbContext
     {
         public AppDbContext()
-            : base("name=BFTFConnectionString")
+            : base("name=AppDbContext")
         {
         }
 
@@ -73,8 +73,7 @@ namespace BFTFLoan.Models.EFModels
 
             modelBuilder.Entity<Member>()
                 .Property(e => e.Gender)
-                .IsFixedLength()
-                .IsUnicode(false);
+                .IsFixedLength();
 
             modelBuilder.Entity<Member>()
                 .HasMany(e => e.Investor)

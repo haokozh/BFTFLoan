@@ -42,7 +42,7 @@ namespace BFTFLoan.Models.EFModels
         public string CellPhone { get; set; }
 
         [Required]
-        [StringLength(1)]
+        [StringLength(10)]
         public string Gender { get; set; }
 
         [Column(TypeName = "date")]
