@@ -56,6 +56,7 @@ namespace BFTFLoan.Models.Services
         }
         #endregion
 
+        // complete
         #region 登入
         // 登入驗證
         public HttpCookie GetEncryptedCookie(LoginVM viewModel)
@@ -100,6 +101,7 @@ namespace BFTFLoan.Models.Services
         }
         #endregion
 
+        // complete
         #region 登出
         // 登出
         public void Logout()
@@ -116,6 +118,7 @@ namespace BFTFLoan.Models.Services
         }
         #endregion
 
+        // complete
         #region 更新 IsEmailVerified
         public void UpdateIsEmailVerified(Member member)
         {

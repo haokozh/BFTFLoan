@@ -12,6 +12,7 @@ namespace BFTFLoan.Attributes
         private static readonly Dictionary<char, int> firstLetterMapping = new Dictionary<char, int>(26);
         private readonly int[] authMultiplier = new int[] { 1, 9, 8, 7, 6, 5, 4, 3, 2, 1, 1 };
 
+        // 防止 Key 重複所以使用 static constructor
         static LegalIDNumberAttribute()
         {
             #region 初始化
