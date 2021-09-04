@@ -8,8 +8,7 @@ namespace BFTFLoan.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly LoanTrialService loanTrialService = new LoanTrialService();
-
+        [Authorize]
         public ActionResult Index()
         {
             return View();

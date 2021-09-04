@@ -132,6 +132,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Attributes\LegalIDNumberAttribute.cs" />
+    <Compile Include="Attributes\RangeOfDateOfBirthAttribute.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoanTrialController.cs" />
     <Compile Include="Controllers\MemberController.cs" />
@@ -148,10 +149,13 @@
     <Compile Include="Models\EFModels\Repayment.cs" />
     <Compile Include="Models\EFModels\Resell.cs" />
     <Compile Include="Models\EFModels\School.cs" />
+    <Compile Include="Models\Repositories\MemberRepository.cs" />
     <Compile Include="Models\Services\LoanTrialService.cs" />
     <Compile Include="Models\Services\MemberService.cs" />
+    <Compile Include="Models\ViewModels\ForgetPasswordVM.cs" />
     <Compile Include="Models\ViewModels\LoanTrialCreateVM.cs" />
     <Compile Include="Models\ViewModels\LoanTrialVM.cs" />
+    <Compile Include="Models\ViewModels\LoginVM.cs" />
     <Compile Include="Models\ViewModels\RegisterVM.cs" />
     <Compile Include="Models\ViewModels\VerifyEmailVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -192,10 +196,10 @@
     <Content Include="Views\Member\Register.cshtml" />
     <Content Include="Views\Member\VerifyEmail.cshtml" />
     <Content Include="Views\Member\Confirm.cshtml" />
+    <Content Include="Views\Member\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\Repositories\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

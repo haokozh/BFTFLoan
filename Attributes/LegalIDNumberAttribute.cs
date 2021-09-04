@@ -9,10 +9,18 @@ namespace BFTFLoan.Attributes
 {
     public class LegalIDNumberAttribute : ValidationAttribute
     {
-        private readonly Dictionary<char, int> firstLetterMapping = new Dictionary<char, int>(26);
+        private static readonly Dictionary<char, int> firstLetterMapping = new Dictionary<char, int>(26);
         private readonly int[] authMultiplier = new int[] { 1, 9, 8, 7, 6, 5, 4, 3, 2, 1, 1 };
 
-        private void Init()
+        static LegalIDNumberAttribute()
+        {
+            #region 初始化
+            // 初始化對照值
+            Init();
+            #endregion
+        }
+
+        private static void Init()
         {
             // 字元 ASCII十進位值, 身份證字號首碼對照值
             // A 65, 10 | H 72, 17 | O 79, 35 | V 86, 29 |
@@ -64,10 +72,6 @@ namespace BFTFLoan.Attributes
         }
         public override bool IsValid(object value)
         {
-            #region 初始化
-            // 初始化對照值
-            Init();
-            #endregion
 
             #region 將傳入的身分證字號轉成 string
             // 將要驗證的值轉成 string

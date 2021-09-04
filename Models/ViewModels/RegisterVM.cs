@@ -30,6 +30,7 @@ namespace BFTFLoan.Models.ViewModels
         [Required(ErrorMessage = "{0}必填")]
         [Display(Name = "確認密碼")]
         [DataType(DataType.Password)]
+        [Compare("Password", ErrorMessage = "{0}不相符")]
         public string ConfirmPassword { get; set; }
 
         [Required(ErrorMessage = "{0}必填")]
@@ -58,12 +59,13 @@ namespace BFTFLoan.Models.ViewModels
         [Required(ErrorMessage = "{0}必填")]
         [Display(Name = "生日")]
         [DataType(DataType.Date)]
+        [RangeOfDateOfBirth(MinAge = 0, MaxAge = 150, ErrorMessage = "{0}有誤")]
         public DateTime DateOfBirth { get; set; }
     }
 
     public static class RegisterAssembler
     {
-        public static Member ViewModelToEntity(this RegisterVM viewModel, bool isEmailVerified)
+        public static Member ViewModelToEntity(this RegisterVM viewModel, string hashedPassword, bool isEmailVerified)
         {
             return new Member
             {
@@ -74,7 +76,7 @@ namespace BFTFLoan.Models.ViewModels
                 Account = viewModel.Account,
 
                 // 密碼
-                Password = viewModel.Password,
+                Password = hashedPassword,
 
                 // 身分證字號
                 IDNumber = viewModel.IDNumber,

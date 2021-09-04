@@ -1,4 +1,5 @@
 ﻿using BFTFLoan.Models.EFModels;
+using BFTFLoan.Models.Repositories;
 using BFTFLoan.Models.ViewModels;
 using OtpNet;
 using System;
@@ -8,13 +9,16 @@ using System.Net;
 using System.Net.Mail;
 using System.Text;
 using System.Web;
+using System.Web.Security;
 
 namespace BFTFLoan.Models.Services
 {
     public class MemberService
     {
-        private AppDbContext db = new AppDbContext();
+        private readonly MemberRepository memberRepository = new MemberRepository();
 
+        // complete
+        #region 註冊
         // 註冊
         public void Register(RegisterVM viewModel)
         {
@@ -44,24 +48,84 @@ namespace BFTFLoan.Models.Services
 
             #region INSERT 註冊資料
             bool IsEmailVerified = false;
-            Member member = viewModel.ViewModelToEntity(IsEmailVerified);
+            string hashedPassword = Hash(password);
+            Member member = viewModel.ViewModelToEntity(hashedPassword, IsEmailVerified);
 
-            db.Member.Add(member);
-            db.SaveChanges();
+            memberRepository.Create(member);
             #endregion
         }
-        // 登入
-        public void Login()
-        {
+        #endregion
 
+        #region 登入
+        // 登入驗證
+        public HttpCookie GetEncryptedCookie(LoginVM viewModel)
+        {
+            if (IsMemberExists(viewModel))
+            {
+                bool isRemeberMe = viewModel.RemeberMe;
+                string account = viewModel.Account;
+
+                // 設定登入持續時間
+                // 525600 分鐘 => 1 年
+                int timeout = isRemeberMe ? 525600 : 20;
+
+                // 新增表單驗證 ticket
+                var ticket = new FormsAuthenticationTicket(account, isRemeberMe, timeout);
+
+                // 加密 ticket
+                string encryptedTicket = FormsAuthentication.Encrypt(ticket);
+
+                // 建立 cookie
+                var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket)
+                {
+                    Expires = DateTime.Now.AddMinutes(timeout),
+                    HttpOnly = true
+                };
+
+                return cookie;
+            } 
+            
+            throw new Exception("帳號或密碼錯誤");
         }
 
+        private bool IsMemberExists(LoginVM viewModel)
+        {
+            string account = viewModel.Account;
+            string hashedPassword = Hash(viewModel.Password);
+
+            Member member = memberRepository
+                .FindMemberByAccountAndPassword(account, hashedPassword);
+
+            return member != null;
+        }
+        #endregion
+
+        #region 登出
         // 登出
         public void Logout()
         {
 
         }
+        #endregion
 
+        // complete
+        #region 依照 Email 尋找某一筆 Member 資料
+        public Member FindMemberByEmail(string email)
+        {
+            return memberRepository.FindMemberByEmail(email);
+        }
+        #endregion
+
+        #region 更新 IsEmailVerified
+        public void UpdateIsEmailVerified(Member member)
+        {
+            member.IsEmailVerified = true;
+            memberRepository.UpdateIsEmailVerified(member);
+        }
+        #endregion
+
+        // complete
+        #region 發送驗證信 & 驗證 OTP
         // 驗證 OTP
         public bool VerifyOTP(Totp totp, string userInput)
         {
@@ -100,7 +164,10 @@ namespace BFTFLoan.Models.Services
 
             smtpClient.Send(mailMessage);
         }
+        #endregion
 
+        // complete
+        #region 產生 OTP
         // 產生 OTP
         public Totp GetOTP()
         {
@@ -109,23 +176,28 @@ namespace BFTFLoan.Models.Services
 
             return totp;
         }
+        #endregion
 
+        // complete
+        #region 帳號是否存在
         // 帳號是否存在
         private bool IsAccountExists(string account)
         {
-            return db.Member
-                .Where(m => m.Account == account)
-                .FirstOrDefault() != null;
+            return memberRepository.IsAccountExists(account);
         }
+        #endregion
 
+        // complete
+        #region 信箱是否存在
         // 信箱是否存在
         private bool IsEmailExists(string email)
         {
-            return db.Member
-                .Where(m => m.Email == email)
-                .FirstOrDefault() != null;
+            return memberRepository.IsEmailExists(email);
         }
+        #endregion
 
+        // complete
+        #region 對密碼做 Hash 運算
         // 檢查密碼與確認密碼是否相等
         private bool IsPasswordEqualsToConfirmPassword(string password, string confirmPassword)
         {
@@ -140,5 +212,6 @@ namespace BFTFLoan.Models.Services
                 .ComputeHash(Encoding.UTF8.GetBytes(value))
                 );
         }
+        #endregion
     }
 }
