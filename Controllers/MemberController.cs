@@ -38,6 +38,8 @@ namespace BFTFLoan.Controllers
                 {
                     memberService.Register(viewModel);
                     Session["userEmail"] = viewModel.Email;
+                    Session["previousPage"] = "Register";
+
                     return RedirectToAction("VerifyEmail");
                 }
             }
@@ -99,7 +101,7 @@ namespace BFTFLoan.Controllers
         }
         #endregion
 
-        // todo
+        // complete
         #region 忘記密碼
         // Forget Password GET
         [AllowAnonymous]
@@ -114,7 +116,10 @@ namespace BFTFLoan.Controllers
         [AllowAnonymous]
         public ActionResult ForgetPassword(ForgetPasswordVM viewModel)
         {
-            return View();
+            Session["userEmail"] = viewModel.Email;
+            Session["previousPage"] = "ForgetPassword";
+
+            return RedirectToAction("VerifyEmail");
         }
         #endregion
 
@@ -155,6 +160,12 @@ namespace BFTFLoan.Controllers
         {
             try
             {
+                string previousPage = Convert.ToString(Session["previousPage"]);
+
+                // 使用者的信箱
+                string userEmail = Convert.ToString(Session["userEmail"]);
+                Member member = memberService.FindMemberByEmail(userEmail);
+
                 Totp totp = (Totp)Session["totp"];
 
                 // 驗證輸入的字串是否和產生的 OTP 相同
@@ -164,13 +175,22 @@ namespace BFTFLoan.Controllers
 
                 if (isVerify)
                 {
-                    // 使用者的註冊信箱
-                    string userEmail = Convert.ToString(Session["userEmail"]);
-                    Member member = memberService.FindMemberByEmail(userEmail);
-                    memberService.UpdateIsEmailVerified(member);
-                }
+                    if (previousPage.Equals("Register"))
+                    {
+                        memberService.UpdateIsEmailVerified(member, isVerify);
 
-                return RedirectToAction("Confirm");
+                        return RedirectToAction("Confirm");
+                    }
+                    else if (previousPage.Equals("ForgetPassword"))
+                    {
+                        Session["forgetPasswordMember"] = member;
+                        return RedirectToAction("ResetPassword");
+                    }
+                    else
+                    {
+                        throw new Exception("找不到 previousPage");
+                    }
+                }
             }
             catch (Exception e)
             {
@@ -185,6 +205,48 @@ namespace BFTFLoan.Controllers
             bool verifyResult = Convert.ToBoolean(Session["verifyResult"]);
 
             ViewBag.VerifyResult = verifyResult ? "Successful" : "Failed";
+
+            return View();
+        }
+        #endregion
+
+        // complete
+        #region 重設密碼
+        public ActionResult ResetPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ResetPassword(ResetPasswordVM viewModel)
+        {
+            try
+            {
+                Member forgetPasswordMember = (Member)Session["forgetPasswordMember"];
+                bool status = false;
+
+                if (ModelState.IsValid)
+                {
+                    memberService.ResetPassword(forgetPasswordMember, viewModel);
+                    status = true;
+                }
+
+                Session["resetConfirm"] = status;
+
+                return RedirectToAction("ResetConfirm");
+            }
+            catch (Exception e)
+            {
+                ModelState.AddModelError(string.Empty, e.Message);
+            }
+
+            return View(viewModel);
+        }
+
+        public ActionResult ResetConfirm()
+        {
+            ViewBag.ResetConfirm = Convert.ToBoolean(Session["resetConfirm"]);
 
             return View();
         }

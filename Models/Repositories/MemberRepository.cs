@@ -21,8 +21,17 @@ namespace BFTFLoan.Models.Repositories
         #region 更新一筆 Member 的 IsEmailVerified 資料
         public void UpdateIsEmailVerified(Member member)
         {
-            Member updateMember = db.Member.Find(member.Id);
-            updateMember.IsEmailVerified = member.IsEmailVerified;
+            Member updatedMember = db.Member.Find(member.Id);
+            updatedMember.IsEmailVerified = member.IsEmailVerified;
+            db.SaveChanges();
+        }
+        #endregion
+
+        #region 更新一筆 Member 的 Password 資料
+        public void UpdatePassword(Member member)
+        {
+            Member updatedMember = db.Member.Find(member.Id);
+            updatedMember.Password = member.Password;
             db.SaveChanges();
         }
         #endregion

@@ -111,6 +111,24 @@ namespace BFTFLoan.Models.Services
         #endregion
 
         // complete
+        #region 重設密碼
+        public void ResetPassword(Member member, ResetPasswordVM viewModel)
+        {
+
+            string newPassword = viewModel.NewPassword;
+            string newConfirmPassword = viewModel.ConfirmPassword;
+
+            if (!IsPasswordEqualsToConfirmPassword(newPassword, newConfirmPassword))
+            {
+                throw new Exception("新密碼與確認密碼不相符");
+            }
+
+            member.Password = Hash(newPassword);
+            memberRepository.UpdatePassword(member);
+        }
+        #endregion
+
+        // complete
         #region 依照 Email 尋找某一筆 Member 資料
         public Member FindMemberByEmail(string email)
         {
@@ -120,9 +138,9 @@ namespace BFTFLoan.Models.Services
 
         // complete
         #region 更新 IsEmailVerified
-        public void UpdateIsEmailVerified(Member member)
+        public void UpdateIsEmailVerified(Member member, bool isEmailVerified)
         {
-            member.IsEmailVerified = true;
+            member.IsEmailVerified = isEmailVerified;
             memberRepository.UpdateIsEmailVerified(member);
         }
         #endregion

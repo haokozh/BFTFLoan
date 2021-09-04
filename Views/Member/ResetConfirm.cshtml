@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "ResetConfirm";
+}
+
+<h2>已重設密碼</h2>
+<h1>@ViewBag.ResetConfirm</h1>
+
+<p>將在 5 秒內重新導向至登入頁面</p>
+
+<div>
+    @Html.ActionLink("回首頁", "Index", "Home")
+</div>
+
+<script>
+    var timer = setTimeout(() => {
+        window.location = '@Url.Action("Login", "Member")';
+    }, 5000);
+</script>
+

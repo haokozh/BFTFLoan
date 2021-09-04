@@ -156,6 +156,7 @@
     <Compile Include="Models\ViewModels\LoanTrialCreateVM.cs" />
     <Compile Include="Models\ViewModels\LoanTrialVM.cs" />
     <Compile Include="Models\ViewModels\LoginVM.cs" />
+    <Compile Include="Models\ViewModels\ResetPasswordVM.cs" />
     <Compile Include="Models\ViewModels\RegisterVM.cs" />
     <Compile Include="Models\ViewModels\VerifyEmailVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -197,6 +198,9 @@
     <Content Include="Views\Member\VerifyEmail.cshtml" />
     <Content Include="Views\Member\Confirm.cshtml" />
     <Content Include="Views\Member\Login.cshtml" />
+    <Content Include="Views\Member\ForgetPassword.cshtml" />
+    <Content Include="Views\Member\ResetPassword.cshtml" />
+    <Content Include="Views\Member\ResetConfirm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
