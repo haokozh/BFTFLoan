@@ -50,6 +50,7 @@ namespace BFTFLoan.Controllers
         }
         #endregion
 
+        // complete
         #region 登入
         //Login GET
         [AllowAnonymous]
@@ -86,9 +87,11 @@ namespace BFTFLoan.Controllers
         }
         #endregion
 
+        // complete
         #region 登出
         // Logout GET
         [Authorize]
+        [HttpPost]
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
