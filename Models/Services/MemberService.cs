@@ -92,10 +92,9 @@ namespace BFTFLoan.Models.Services
         private bool IsMemberExists(LoginVM viewModel)
         {
             string account = viewModel.Account;
-            string hashedPassword = Hash(viewModel.Password);
+            string password = viewModel.Password;
 
-            Member member = memberRepository
-                .FindMemberByAccountAndPassword(account, hashedPassword);
+            Member member = FindMemberByAccountAndPassword(account, password);
 
             return member != null;
         }
@@ -137,11 +136,62 @@ namespace BFTFLoan.Models.Services
         #endregion
 
         // complete
+        #region 依照帳號密碼尋找某一筆 Member 資料
+        public Member FindMemberByAccountAndPassword(string account, string password)
+        {
+            string hashedPassword = Hash(password);
+
+            return memberRepository
+                .FindMemberByAccountAndPassword(account, hashedPassword);
+        }
+        #endregion
+
+        // complete
+        #region 依照帳號尋找某一筆 Member 資料
+        public Member FindMemberByAccount(string account)
+        {
+            return memberRepository.FindMemberByAccount(account);
+        }
+        #endregion
+
+        // complete
+        #region 依照 Id 尋找某一筆 Member 資料
+        public Member FindMemberById(int? id)
+        {
+            return memberRepository.FindMemberById(id);
+        }
+        #endregion
+
+        // complete
+        #region 更新登入時間
+        public void UpdateLastLoginTime(Member member, DateTime lastLoginTime)
+        {
+            member.LastLoginTime = lastLoginTime;
+            memberRepository.UpdateLastLoginTime(member);
+        }
+        #endregion
+
+        // complete
         #region 更新 IsEmailVerified
         public void UpdateIsEmailVerified(Member member, bool isEmailVerified)
         {
             member.IsEmailVerified = isEmailVerified;
             memberRepository.UpdateIsEmailVerified(member);
+        }
+        #endregion
+
+        // complete
+        #region 更新 MemberProfile
+        public void UpdateMemberProfile(ProfileVM viewModel)
+        {
+            memberRepository.UpdateMemberProfile(
+                viewModel.Id,
+                viewModel.Name,
+                viewModel.IDNumber,
+                viewModel.CellPhone,
+                viewModel.Gender,
+                viewModel.DateOfBirth
+                );
         }
         #endregion
 

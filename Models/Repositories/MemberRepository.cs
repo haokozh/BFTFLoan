@@ -18,11 +18,35 @@ namespace BFTFLoan.Models.Repositories
         }
         #endregion
 
+        #region 更新一筆 Member 資料至資料庫
+        public void UpdateMemberProfile(int id, string name, string idNumber, string cellPhone, string gender, DateTime dateOfBirth)
+        {
+            Member updatedMember = db.Member.Find(id);
+            updatedMember.Name = name;
+            updatedMember.IDNumber = idNumber;
+            updatedMember.CellPhone = cellPhone;
+            updatedMember.Gender = gender;
+            updatedMember.DateOfBirth = dateOfBirth;
+
+            db.SaveChanges();
+        }
+        #endregion
+
         #region 更新一筆 Member 的 IsEmailVerified 資料
         public void UpdateIsEmailVerified(Member member)
         {
             Member updatedMember = db.Member.Find(member.Id);
             updatedMember.IsEmailVerified = member.IsEmailVerified;
+
+            db.SaveChanges();
+        }
+        #endregion
+
+        #region 更新一筆 Member 的 LastLoginTime 資料
+        public void UpdateLastLoginTime(Member member)
+        {
+            Member updatedMember = db.Member.Find(member.Id);
+            updatedMember.LastLoginTime = member.LastLoginTime;
             db.SaveChanges();
         }
         #endregion
@@ -45,12 +69,28 @@ namespace BFTFLoan.Models.Repositories
         }
         #endregion
 
+        #region 依照帳號尋找某一筆 Member 資料
+        public Member FindMemberByAccount(string account)
+        {
+            return db.Member
+                .Where(m => m.Account == account)
+                .FirstOrDefault();
+        }
+        #endregion
+
         #region 依照 Email 尋找某一筆 Member 資料
         public Member FindMemberByEmail(string email)
         {
             return db.Member
                 .Where(m => m.Email == email)
                 .FirstOrDefault();
+        }
+        #endregion
+
+        #region 依照 Id 尋找某一筆 Member 資料
+        public Member FindMemberById(int? id)
+        {
+            return db.Member.Find(id);
         }
         #endregion
 

@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "首頁";
 }
 
 @{
@@ -9,11 +9,11 @@
 
         using (Html.BeginForm("Logout", "Member", FormMethod.Post, new { id = "logoutForm" }))
         {
-            <a href="javascript:document.getElementById('logoutForm').submit()">Logout</a>
+            <a href="javascript:document.getElementById('logoutForm').submit()"><h2>登出</h2></a>
         }
     }
     else
     {
-        <h1>IsNotAuthenticated</h1>
+        <h1>IsNotAuthenticated 尚未登入</h1>
     }
 }

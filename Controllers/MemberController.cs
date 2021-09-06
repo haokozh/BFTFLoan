@@ -74,6 +74,16 @@ namespace BFTFLoan.Controllers
                     // 取得加密後的 Cookie
                     var cookie = memberService.GetEncryptedCookie(viewModel);
 
+                    string account = viewModel.Account;
+                    string password = viewModel.Password;
+
+                    // 依照帳號密碼找到 member
+                    Member loginMember = memberService
+                        .FindMemberByAccountAndPassword(account, password);
+
+                    // 更新 member 登入時間
+                    memberService.UpdateLastLoginTime(loginMember, DateTime.Now);
+
                     // 送回 client 端
                     Response.Cookies.Add(cookie);
 
@@ -91,11 +101,12 @@ namespace BFTFLoan.Controllers
 
         // complete
         #region 登出
-        // Logout GET
+        // Logout POST
         [Authorize]
         [HttpPost]
         public ActionResult Logout()
         {
+            Session.Clear();
             FormsAuthentication.SignOut();
             return RedirectToAction("Index", "Home");
         }
@@ -120,6 +131,63 @@ namespace BFTFLoan.Controllers
             Session["previousPage"] = "ForgetPassword";
 
             return RedirectToAction("VerifyEmail");
+        }
+        #endregion
+
+        // complete
+        #region 顯示個人資料
+        [Authorize]
+        public ActionResult MemberProfile()
+        {
+            Member member = memberService.FindMemberByAccount(User.Identity.Name);
+
+            if (member == null)
+            {
+                return HttpNotFound();
+            }
+
+            ProfileVM memberProfile = member.EntityToViewModel();
+
+            return View(memberProfile);
+        }
+        #endregion
+
+        // todo
+        #region 修改個人資料
+        [Authorize]
+        public ActionResult EditProfile()
+        {
+            Member member = memberService.FindMemberByAccount(User.Identity.Name);
+
+            if (member == null)
+            {
+                return HttpNotFound();
+            }
+
+            ProfileVM memberProfile = member.EntityToViewModel();
+
+            return View(memberProfile);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public ActionResult EditProfile(ProfileVM viewModel)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    memberService.UpdateMemberProfile(viewModel);
+
+                    return RedirectToAction("MemberProfile");
+                }
+            }
+            catch (Exception e)
+            {
+                ModelState.AddModelError(string.Empty, e.Message);
+            }
+            return View(viewModel);
         }
         #endregion
 
