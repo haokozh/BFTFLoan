@@ -134,6 +134,7 @@
     <Compile Include="Attributes\LegalIDNumberAttribute.cs" />
     <Compile Include="Attributes\RangeOfDateOfBirthAttribute.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InvestmentController.cs" />
     <Compile Include="Controllers\LoanController.cs" />
     <Compile Include="Controllers\LoanTrialController.cs" />
     <Compile Include="Controllers\MemberController.cs" />
@@ -149,11 +150,15 @@
     <Compile Include="Models\EFModels\Repayment.cs" />
     <Compile Include="Models\EFModels\Resell.cs" />
     <Compile Include="Models\EFModels\School.cs" />
+    <Compile Include="Models\Repositories\InvestmentRepository.cs" />
     <Compile Include="Models\Repositories\LoanRepository.cs" />
     <Compile Include="Models\Repositories\MemberRepository.cs" />
+    <Compile Include="Models\Services\InvestmentService.cs" />
     <Compile Include="Models\Services\LoanService.cs" />
     <Compile Include="Models\Services\LoanTrialService.cs" />
     <Compile Include="Models\Services\MemberService.cs" />
+    <Compile Include="Models\ViewModels\InvestmentCreateVM.cs" />
+    <Compile Include="Models\ViewModels\InvestmentVM.cs" />
     <Compile Include="Models\ViewModels\LoanCreateVM.cs" />
     <Compile Include="Models\ViewModels\LoanVM.cs" />
     <Compile Include="Models\ViewModels\ForgetPasswordVM.cs" />
@@ -209,6 +214,7 @@
     <Content Include="Views\Member\MemberProfile.cshtml" />
     <Content Include="Views\Member\EditProfile.cshtml" />
     <Content Include="Views\Loan\MyLoan.cshtml" />
+    <Content Include="Views\Investment\MyInvestment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

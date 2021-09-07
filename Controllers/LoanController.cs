@@ -19,6 +19,7 @@ namespace BFTFLoan.Controllers
             // 顯示已登入的 Member 所有的 Loan
             Member member = loanService.FindMemberByAccount(User.Identity.Name);
             List<Loan> loans = loanService.FindAllLoanByBorrowerId(member.Id);
+
             return View(loans.EntitiesToViewModels());
         }
 
