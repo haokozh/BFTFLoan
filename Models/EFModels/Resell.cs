@@ -21,6 +21,6 @@ namespace BFTFLoan.Models.EFModels
 
         public virtual Investment Investment { get; set; }
 
-        public virtual Investor Investor { get; set; }
+        public virtual Member Member { get; set; }
     }
 }

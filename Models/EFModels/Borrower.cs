@@ -9,14 +9,8 @@ namespace BFTFLoan.Models.EFModels
     [Table("Borrower")]
     public partial class Borrower
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Borrower()
-        {
-            Loan = new HashSet<Loan>();
-        }
-
-        public int Id { get; set; }
-
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int MemberId { get; set; }
 
         public int SchoolId { get; set; }
@@ -28,10 +22,5 @@ namespace BFTFLoan.Models.EFModels
         public virtual Member Member { get; set; }
 
         public virtual School School { get; set; }
-
-        public virtual Certificate Certificate { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Loan> Loan { get; set; }
     }
 }

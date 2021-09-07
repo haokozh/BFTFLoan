@@ -12,8 +12,8 @@ namespace BFTFLoan.Models.EFModels
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Member()
         {
-            Borrower = new HashSet<Borrower>();
-            Investor = new HashSet<Investor>();
+            Investment = new HashSet<Investment>();
+            Resell = new HashSet<Resell>();
         }
 
         public int Id { get; set; }
@@ -56,10 +56,12 @@ namespace BFTFLoan.Models.EFModels
 
         public DateTime LastLoginTime { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Borrower> Borrower { get; set; }
+        public virtual Borrower Borrower { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Investor> Investor { get; set; }
+        public virtual ICollection<Investment> Investment { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Resell> Resell { get; set; }
     }
 }

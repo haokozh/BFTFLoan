@@ -134,6 +134,7 @@
     <Compile Include="Attributes\LegalIDNumberAttribute.cs" />
     <Compile Include="Attributes\RangeOfDateOfBirthAttribute.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoanController.cs" />
     <Compile Include="Controllers\LoanTrialController.cs" />
     <Compile Include="Controllers\MemberController.cs" />
     <Compile Include="Global.asax.cs">
@@ -143,15 +144,18 @@
     <Compile Include="Models\EFModels\Borrower.cs" />
     <Compile Include="Models\EFModels\Certificate.cs" />
     <Compile Include="Models\EFModels\Investment.cs" />
-    <Compile Include="Models\EFModels\Investor.cs" />
     <Compile Include="Models\EFModels\Loan.cs" />
     <Compile Include="Models\EFModels\Member.cs" />
     <Compile Include="Models\EFModels\Repayment.cs" />
     <Compile Include="Models\EFModels\Resell.cs" />
     <Compile Include="Models\EFModels\School.cs" />
+    <Compile Include="Models\Repositories\LoanRepository.cs" />
     <Compile Include="Models\Repositories\MemberRepository.cs" />
+    <Compile Include="Models\Services\LoanService.cs" />
     <Compile Include="Models\Services\LoanTrialService.cs" />
     <Compile Include="Models\Services\MemberService.cs" />
+    <Compile Include="Models\ViewModels\LoanCreateVM.cs" />
+    <Compile Include="Models\ViewModels\LoanVM.cs" />
     <Compile Include="Models\ViewModels\ForgetPasswordVM.cs" />
     <Compile Include="Models\ViewModels\LoanTrialCreateVM.cs" />
     <Compile Include="Models\ViewModels\LoanTrialVM.cs" />
@@ -204,6 +208,7 @@
     <Content Include="Views\Member\ResetConfirm.cshtml" />
     <Content Include="Views\Member\MemberProfile.cshtml" />
     <Content Include="Views\Member\EditProfile.cshtml" />
+    <Content Include="Views\Loan\MyLoan.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

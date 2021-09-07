@@ -22,7 +22,5 @@ namespace BFTFLoan.Models.EFModels
         public byte[] StudentIDBack { get; set; }
 
         public byte[] CreditReport { get; set; }
-
-        public virtual Borrower Borrower { get; set; }
     }
 }

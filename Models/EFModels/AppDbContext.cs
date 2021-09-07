@@ -15,7 +15,6 @@ namespace BFTFLoan.Models.EFModels
         public virtual DbSet<Borrower> Borrower { get; set; }
         public virtual DbSet<Certificate> Certificate { get; set; }
         public virtual DbSet<Investment> Investment { get; set; }
-        public virtual DbSet<Investor> Investor { get; set; }
         public virtual DbSet<Loan> Loan { get; set; }
         public virtual DbSet<Member> Member { get; set; }
         public virtual DbSet<Repayment> Repayment { get; set; }
@@ -24,16 +23,6 @@ namespace BFTFLoan.Models.EFModels
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Borrower>()
-                .HasOptional(e => e.Certificate)
-                .WithRequired(e => e.Borrower)
-                .WillCascadeOnDelete();
-
-            modelBuilder.Entity<Borrower>()
-                .HasMany(e => e.Loan)
-                .WithRequired(e => e.Borrower)
-                .WillCascadeOnDelete(false);
-
             modelBuilder.Entity<Investment>()
                 .Property(e => e.Amount)
                 .HasPrecision(19, 4);
@@ -41,16 +30,6 @@ namespace BFTFLoan.Models.EFModels
             modelBuilder.Entity<Investment>()
                 .HasMany(e => e.Resell)
                 .WithRequired(e => e.Investment)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Investor>()
-                .HasMany(e => e.Investment)
-                .WithRequired(e => e.Investor)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Investor>()
-                .HasMany(e => e.Resell)
-                .WithRequired(e => e.Investor)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Loan>()
@@ -76,8 +55,20 @@ namespace BFTFLoan.Models.EFModels
                 .IsFixedLength();
 
             modelBuilder.Entity<Member>()
-                .HasMany(e => e.Investor)
+                .HasOptional(e => e.Borrower)
                 .WithRequired(e => e.Member)
+                .WillCascadeOnDelete();
+
+            modelBuilder.Entity<Member>()
+                .HasMany(e => e.Investment)
+                .WithRequired(e => e.Member)
+                .HasForeignKey(e => e.InvestorId)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Member>()
+                .HasMany(e => e.Resell)
+                .WithRequired(e => e.Member)
+                .HasForeignKey(e => e.InvestorId)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Repayment>()

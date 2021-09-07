@@ -30,8 +30,6 @@ namespace BFTFLoan.Models.EFModels
 
         public DateTime CreationTime { get; set; }
 
-        public virtual Borrower Borrower { get; set; }
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Investment> Investment { get; set; }
 

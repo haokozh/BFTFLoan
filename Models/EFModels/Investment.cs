@@ -27,7 +27,7 @@ namespace BFTFLoan.Models.EFModels
 
         public DateTime CreationTime { get; set; }
 
-        public virtual Investor Investor { get; set; }
+        public virtual Member Member { get; set; }
 
         public virtual Loan Loan { get; set; }
 
